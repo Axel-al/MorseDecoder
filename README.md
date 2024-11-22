@@ -1,6 +1,5 @@
 # MorseDecoder
-
-## Cahier des charges pour un projet de décodeur Morse interactif sur FPGA Basys 3
+# Cahier des charges pour un projet de décodeur Morse interactif sur FPGA Basys 3
 
 ## 1. Introduction
 Ce projet vise à concevoir un décodeur Morse capable de convertir des impulsions manuelles en lettres et chiffres alphanumériques, affichés en temps réel sur les LED 7 segments ou via un écran VGA. Le système doit être interactif, précis et offrir une expérience utilisateur fluide.
