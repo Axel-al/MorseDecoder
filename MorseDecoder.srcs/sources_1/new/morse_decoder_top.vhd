@@ -21,8 +21,6 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -35,11 +33,11 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity morse_decoder_top is
     Port (
-        clk         : in STD_LOGIC;
-        reset       : in STD_LOGIC; -- Ajout du signal reset
-        button1     : in STD_LOGIC; -- Bouton pour point
-        button2     : in STD_LOGIC; -- Bouton pour espace
-        lcd_display : out STD_LOGIC_VECTOR(6 downto 0) -- Sortie vers écran LCD 7 segments
+        clk_i           : in STD_LOGIC;
+        reset_i         : in STD_LOGIC; -- Ajout du signal reset
+        lbutton_i       : in STD_LOGIC; -- Bouton pour point
+        rbutton_i       : in STD_LOGIC; -- Bouton pour espace
+        lcd_display_o   : out STD_LOGIC_VECTOR(6 downto 0) -- Sortie vers écran LCD 7 segments
     );
 end morse_decoder_top;
 
@@ -52,27 +50,27 @@ architecture Behavioral of morse_decoder_top is
     -- Composants
     component morse_to_binary is
         Port (
-            clk       : in STD_LOGIC;
-            reset     : in STD_LOGIC;
-            button1   : in STD_LOGIC;
-            button2   : in STD_LOGIC;
-            morse_out : out STD_LOGIC_VECTOR(7 downto 0)
+            clk_i     : in STD_LOGIC;
+            reset_i   : in STD_LOGIC;
+            lbutton_i : in STD_LOGIC;
+            rbutton_i : in STD_LOGIC;
+            morse_o : out STD_LOGIC_VECTOR(7 downto 0)
         );
     end component;
 
     component binary_to_ascii is
         Port (
-            morse_in   : in STD_LOGIC_VECTOR(7 downto 0);
-            ascii_out  : out STD_LOGIC_VECTOR(7 downto 0)
+            morse_i   : in STD_LOGIC_VECTOR(7 downto 0);
+            ascii_o  : out STD_LOGIC_VECTOR(7 downto 0)
         );
     end component;
 
     component ascii_to_display is
         Port (
-            clk           : in STD_LOGIC;
-            reset         : in STD_LOGIC;
-            ascii_in      : in STD_LOGIC_VECTOR(7 downto 0);
-            lcd_display   : out STD_LOGIC_VECTOR(6 downto 0)
+            clk_i         : in STD_LOGIC;
+            reset_i       : in STD_LOGIC;
+            ascii_i      : in STD_LOGIC_VECTOR(7 downto 0);
+            lcd_display_o   : out STD_LOGIC_VECTOR(6 downto 0)
         );
     end component;
     
@@ -80,24 +78,24 @@ begin
     -- Instanciation des composants
     u1: morse_to_binary
         Port map (
-            clk       => clk,
-            reset     => reset,
-            button1   => button1,
-            button2   => button2,
-            morse_out => morse_code
+            clk_i     => clk_i,
+            reset_i   => reset_i,
+            lbutton_i => lbutton_i,
+            rbutton_i => rbutton_i,
+            morse_o => morse_code
         );
 
     u2: binary_to_ascii
         Port map (
-            morse_in  => morse_code,
-            ascii_out => ascii_code
+            morse_i  => morse_code,
+            ascii_o => ascii_code
         );
 
     u3: ascii_to_display
         Port map (
-            clk           => clk,
-            reset         => reset,
-            ascii_in      => ascii_code,
-            lcd_display   => lcd_display
+            clk_i         => clk_i,
+            reset_i       => reset_i,
+            ascii_i       => ascii_code,
+            lcd_display_o => lcd_display_o
         );
 end Behavioral;
