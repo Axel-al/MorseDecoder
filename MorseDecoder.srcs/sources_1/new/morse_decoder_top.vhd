@@ -54,7 +54,8 @@ architecture Behavioral of morse_decoder_top is
             reset_i   : in STD_LOGIC;
             lbutton_i : in STD_LOGIC;
             rbutton_i : in STD_LOGIC;
-            morse_o : out STD_LOGIC_VECTOR(7 downto 0)
+            active_o  : out STD_LOGIC;
+            morse_o   : out STD_LOGIC_VECTOR(0 to 18)
         );
     end component;
 

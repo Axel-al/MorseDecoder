@@ -1,5 +1,3 @@
-# Constraints File (constraints.xdc)
-
 # Boutons
 set_property PACKAGE_PIN W19 [get_ports {lbutton_i}] #Bouton gauche
 set_property PACKAGE_PIN T17 [get_ports {rbutton_i}] #Bouton droite
