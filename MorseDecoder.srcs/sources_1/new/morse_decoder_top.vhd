@@ -1,51 +1,21 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 12/11/2024 02:52:59 PM
--- Design Name: 
--- Module Name: morse_decoder_top - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity morse_decoder_top is
     Port (
-        clk_i           : in STD_LOGIC;
-        reset_i         : in STD_LOGIC; -- Ajout du signal reset
-        lbutton_i       : in STD_LOGIC; -- Bouton pour point
-        rbutton_i       : in STD_LOGIC; -- Bouton pour espace
-        lcd_display_o   : out STD_LOGIC_VECTOR(6 downto 0) -- Sortie vers écran LCD 7 segments
+        clk_i        : in STD_LOGIC;
+        reset_i      : in STD_LOGIC;
+        lbutton_i    : in STD_LOGIC;
+        rbutton_i    : in STD_LOGIC;
+        ascii_o      : out STD_LOGIC_VECTOR(7 downto 0); -- Code ASCII de la lettre ou chiffre
+        new_letter_o : out STD_LOGIC -- Signal indiquant qu'une nouvelle lettre a été décodée
     );
 end morse_decoder_top;
 
 architecture Behavioral of morse_decoder_top is
     -- Signaux intermédiaires
-    signal morse_code   : STD_LOGIC_VECTOR(7 downto 0); -- Code Morse généré
-    signal ascii_code   : STD_LOGIC_VECTOR(7 downto 0); -- Code ASCII correspondant
-    signal display_data : STD_LOGIC_VECTOR(6 downto 0); -- Données pour affichage
+    signal morse_code     : STD_LOGIC_VECTOR(0 to 18); -- Code Morse généré
+    signal active_morse_o : STD_LOGIC; -- Code qui correspond à l'envoie d'une nouvelle lettre en code morse
     
     -- Composants
     component morse_to_binary is
@@ -61,17 +31,12 @@ architecture Behavioral of morse_decoder_top is
 
     component binary_to_ascii is
         Port (
-            morse_i   : in STD_LOGIC_VECTOR(7 downto 0);
-            ascii_o  : out STD_LOGIC_VECTOR(7 downto 0)
-        );
-    end component;
-
-    component ascii_to_display is
-        Port (
-            clk_i         : in STD_LOGIC;
-            reset_i       : in STD_LOGIC;
-            ascii_i      : in STD_LOGIC_VECTOR(7 downto 0);
-            lcd_display_o   : out STD_LOGIC_VECTOR(6 downto 0)
+            clk_i        : in STD_LOGIC;
+            reset_i      : in STD_LOGIC;
+            morse_i      : in STD_LOGIC_VECTOR(0 to 18); -- Signal Morse reçu (jusqu'à 19 bits)
+            active_i     : in STD_LOGIC; -- Indique si le signal Morse est valide
+            ascii_o      : out STD_LOGIC_VECTOR(7 downto 0); -- Code ASCII de la lettre ou chiffre
+            new_letter_o : out STD_LOGIC -- Signal indiquant qu'une nouvelle lettre a été décodée
         );
     end component;
     
@@ -83,20 +48,17 @@ begin
             reset_i   => reset_i,
             lbutton_i => lbutton_i,
             rbutton_i => rbutton_i,
-            morse_o => morse_code
+            active_o  => active_morse_o,
+            morse_o   => morse_code
         );
 
     u2: binary_to_ascii
         Port map (
-            morse_i  => morse_code,
-            ascii_o => ascii_code
-        );
-
-    u3: ascii_to_display
-        Port map (
-            clk_i         => clk_i,
-            reset_i       => reset_i,
-            ascii_i       => ascii_code,
-            lcd_display_o => lcd_display_o
+            clk_i        => clk_i,
+            reset_i      => reset_i,
+            morse_i      => morse_code,
+            active_i     => active_morse_o,
+            ascii_o      => ascii_o,
+            new_letter_o => new_letter_o
         );
 end Behavioral;

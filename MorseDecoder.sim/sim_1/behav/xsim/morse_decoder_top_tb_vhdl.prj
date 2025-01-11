@@ -1,0 +1,9 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../MorseDecoder.srcs/sources_1/new/binary_to_ascii.vhd" \
+"../../../../MorseDecoder.srcs/sources_1/new/morse_decoder_top.vhd" \
+"../../../../MorseDecoder.srcs/sources_1/new/morse_to_binary.vhd" \
+"../../../../MorseDecoder.srcs/sim_1/new/morse_decoder_top_tb.vhd" \
+
+# Do not sort compile order
+nosort
