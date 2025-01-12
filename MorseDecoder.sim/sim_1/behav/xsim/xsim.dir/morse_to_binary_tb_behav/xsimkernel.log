@@ -2,3 +2,6 @@ Running: xsim.dir/morse_to_binary_tb_behav/xsimk -simmode gui -wdb morse_to_bina
 Design successfully loaded
 Design Loading Memory Usage: 33076 KB (Peak: 33680 KB)
 Design Loading CPU Usage: 10 ms
+Simulation completed
+Simulation Memory Usage: 114812 KB (Peak: 172344 KB)
+Simulation CPU Usage: 60 ms

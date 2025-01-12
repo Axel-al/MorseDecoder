@@ -1,0 +1,7 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/axel/Documents/Vivado/CoCiNum/MorseDecoder/MorseDecoder.sim/sim_1/impl/func/xsim/morse_decoder_top_tb_func_impl.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ascii_to_display'
+INFO: [VRFC 10-3107] analyzing entity 'binary_to_ascii'
+INFO: [VRFC 10-3107] analyzing entity 'morse_to_binary'
+INFO: [VRFC 10-3107] analyzing entity 'morse_decoder_top'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/axel/Documents/Vivado/CoCiNum/MorseDecoder/MorseDecoder.srcs/sim_1/new/morse_decoder_top_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'morse_decoder_top_tb'
