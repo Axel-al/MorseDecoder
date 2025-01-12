@@ -13,12 +13,13 @@ entity ascii_to_display is
 end ascii_to_display;
 
 architecture Behavioral of ascii_to_display is
+    constant REFRESH_PERIOD : integer := 100000; -- Période de rafraîchissement
     constant NB_DIGITS : integer := 4; -- Nombre de chiffres/lettres sur l'écran
 
     -- Signaux internes
     type Display_Array is array (3 downto 0) of STD_LOGIC_VECTOR(6 downto 0);
     signal display_buffer : Display_Array := (others => (others => '1')); -- Buffer pour les caractères
-    signal refresh_counter : integer range 0 to 100000 := 0; -- Compteur pour rafraîchissement
+    signal refresh_counter : integer range 0 to REFRESH_PERIOD := 0; -- Compteur pour rafraîchissement
     signal digit_select : integer range 0 to NB_DIGITS - 1 := 0; -- Sélection du digit actif
     signal new_letter_i_prev : STD_LOGIC := '0';
 
@@ -74,7 +75,7 @@ begin
             refresh_counter <= 0;
             digit_select <= 0;
         elsif rising_edge(clk_i) then
-            if refresh_counter = 100000 then
+            if refresh_counter = REFRESH_PERIOD then
                 refresh_counter <= 0;
                 digit_select <= (digit_select + 1) mod NB_DIGITS;
             else
