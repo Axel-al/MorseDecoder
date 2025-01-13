@@ -60,7 +60,6 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config  -id {XSIM 43-3321}  -string {{ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit morse_decoder_top_tb in library work failed.}}  -suppress 
 set_msg_config  -id {VRFC 10-322}  -string {{ERROR: [VRFC 10-322] array element type cannot be unconstrained [/home/axel/Documents/Vivado/CoCiNum/MorseDecoder/MorseDecoder.srcs/sources_1/new/binary_to_ascii.vhd:16]}}  -suppress 
 

@@ -24,9 +24,9 @@ set_property IOSTANDARD LVCMOS33  [get_ports {seg_display_o[*]}]
 
 
 # Pin pour sélectionner quel charactère parmis les 4 afficher
-set_property PACKAGE_PIN U2 [get_ports {char_n_o[0]}]
-set_property PACKAGE_PIN U4 [get_ports {char_n_o[1]}]
-set_property PACKAGE_PIN V4 [get_ports {char_n_o[2]}]
-set_property PACKAGE_PIN W4 [get_ports {char_n_o[3]}]
+set_property PACKAGE_PIN U2 [get_ports {char_n_o[3]}]
+set_property PACKAGE_PIN U4 [get_ports {char_n_o[2]}]
+set_property PACKAGE_PIN V4 [get_ports {char_n_o[1]}]
+set_property PACKAGE_PIN W4 [get_ports {char_n_o[0]}]
 
 set_property IOSTANDARD LVCMOS33 [get_ports {char_n_o[*]}]

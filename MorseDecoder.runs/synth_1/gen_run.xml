@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1736651084">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1736760930">
   <File Type="VDS-TIMING-PB" Name="morse_decoder_top_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="morse_decoder_top_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="morse_decoder_top.dcp"/>

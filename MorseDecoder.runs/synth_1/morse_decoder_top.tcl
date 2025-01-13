@@ -18,8 +18,6 @@ proc create_report { reportName command } {
   }
 }
 set_param xicom.use_bs_reader 1
-set_param chipscope.maxJobs 1
-set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config  -id {XSIM 43-3321}  -string {{ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit morse_decoder_top_tb in library work failed.}}  -suppress 
 set_msg_config  -id {VRFC 10-322}  -string {{ERROR: [VRFC 10-322] array element type cannot be unconstrained [/home/axel/Documents/Vivado/CoCiNum/MorseDecoder/MorseDecoder.srcs/sources_1/new/binary_to_ascii.vhd:16]}}  -suppress 
 create_project -in_memory -part xc7a35tcpg236-1
